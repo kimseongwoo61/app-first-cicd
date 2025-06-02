@@ -49,16 +49,16 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ap-northeast-2
 
       - name: Login to Amazon ECR (Private)
         run: |
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_PRIVATE_ID }}.dkr.ecr.us-east-1.amazonaws.com
+          aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.AWS_ECR_PRIVATE_ID }}.dkr.ecr.us-east-1.amazonaws.com/${{ secrets.AWS_ECR_PRIVATE_REPOSITORY }}:latest .
+          docker build -t ${{ secrets.AWS_ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.AWS_ECR_PRIVATE_REPOSITORY }}:latest .
 
       - name: Push Docker image to Amazon ECR
         run: |
-          docker push ${{ secrets.AWS_ECR_PRIVATE_ID }}.dkr.ecr.us-east-1.amazonaws.com/${{ secrets.AWS_ECR_PRIVATE_REPOSITORY }}:latest
+          docker push ${{ secrets.AWS_ECR_PRIVATE_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.AWS_ECR_PRIVATE_REPOSITORY }}:latest
